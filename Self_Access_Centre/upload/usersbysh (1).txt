@@ -1,0 +1,16 @@
+#!/bin/bash
+#filename:/root/bin/usersbysh
+if [[ $1 == "--help" || $1 == "-h" || $# -eq 0 ]] ; then
+  echo "Usage:$0 -s <SHELL>|-h|--help"
+  exit 0
+elif [ $1 != "-s" ] ; then
+  echo -e "$0:Invalid option -$1 \nTry '$0 --help|-h' for more information."
+  exit 2
+else
+  (grep $2 /etc/shells > /dev/null) || { echo "Invalid shell." ; exit 1;}
+  users=$(grep $2 /etc/passwd | cut -d: -f1)
+  usercounts=$(grep $2 /etc/passwd | cut -d: -f1 | wc -l)
+  echo -e "$2 - $usercounts users, they are:\c"
+  for user in ${users[*]} ; do echo -e "$user \c" ; done
+  echo
+fi

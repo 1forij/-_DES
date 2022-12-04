@@ -51,6 +51,9 @@ def hotest_blog(today, contenttype):
     end_time = today
 
     hot_datas = ReadDetail.objects.filter(content_type=contenttype, date__range=(start_time, end_time)).values('content_type','object_id').annotate(read_num_sum=Sum('read_num')).order_by('-read_num_sum')
+    print(hot_datas,len(hot_datas))
 
-    return hot_datas[:5]
+    if len(hot_datas) >= 5:
+        return hot_datas[:5]
+    return hot_datas
 

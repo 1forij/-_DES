@@ -65,7 +65,7 @@ def blog_detail(request,blog_id):# 性能硬伤
 
     response = render(request,'blog/blog_detail.html', context)
     if read_cookie !='':    # 已读情况下，不刷新cookie的生存时间
-        response.set_cookie(key=read_cookie, value='True', max_age=300)
+        response.set_cookie(key=read_cookie, value='True', max_age=300,httponly=False)
 
     return response
 

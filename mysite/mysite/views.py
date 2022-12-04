@@ -23,7 +23,7 @@ def index(request):
         hot_datas = hotest_blog(today, contenttype)     # 函数计算获取
         cache.set("hot_datas",hot_datas,86400)          # 存入缓存，备用
         
-    for i in range(5):
+    for i in range(len(hot_datas)):
         title = Blog.objects.get(id = hot_datas[i].get("object_id")).title
         hot_blogs [title] = hot_datas[i]
 

