@@ -1,4 +1,4 @@
-import os
+import os, platform
 from django.shortcuts import render
 from django.views import View
 from django.conf import settings
@@ -154,9 +154,9 @@ def func(request,args,txt):
 
 def down(request):
     filename = request.GET.get("res")
-    path = os.getcwd() + "\\upload"
+    path = os.getcwd() + ("\\upload" if platform.system() == "Windows" else "/upload")
 
-    if filename in os.listdir(path):
+    if filename.split('/')[-1] in os.listdir(path):
         file_full_name = os.path.join(settings.MEDIA_ROOT, filename)
 
         response = FileResponse(open(file_full_name, 'rb'))
