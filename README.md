@@ -6,3 +6,5 @@
 python 3.7
 
 requirements.txt
+
+核心代码都在zixishi/views.py和des_test_modify.py内
