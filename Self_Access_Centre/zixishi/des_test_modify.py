@@ -346,18 +346,7 @@ class CFB(ECB):
         return part_text
 
 class OFB(CFB):
-    def add_xor(self):
-        iv_des = "".join(self.iv_des)
-        text = "".join(self.text)
-        tmp = "" ; res = []
-
-        for i in range(len(text)):
-            tmp += str(eval(text[i])^eval(iv_des[i]))
-            if len(tmp) == 8:
-                res.append(tmp)
-                tmp = ""
-
-        return res
+    pass
 
 class CTR(OFB):
     pass
