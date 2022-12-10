@@ -112,11 +112,18 @@ def func(request,args,txt):
         des_ofb.key = des_ofb.to_str_bin(des_ofb.key)  # 将key转化为2进制矩阵
         des_ofb.key = des_ofb.get_key_16(des_ofb.key, mode)  # 得到16轮密钥(兼容了加密的key1~16,解密的key16~1)
 
-        des_ofb.l, des_ofb.r, des_ofb.r_tmp = des_ofb.ip_trans(des_ofb.iv)  # 得到l0 和 r0
-        des_ofb.round_16_f()
-        des_ofb.iv_des = des_ofb.ip_invert()
+        for i in range(8):
+            des_ofb.l, des_ofb.r, des_ofb.r_tmp = des_ofb.ip_trans(des_ofb.iv)  # 得到l0 和 r0
+            des_ofb.round_16_f()
+            des_ofb.iv_des = des_ofb.ip_invert()
 
-        des_ofb.text = des_ofb.add_xor()
+            tmp_str = des_ofb.add_xor()
+
+            des_ofb.text.append(tmp_str)
+            des_ofb.iv.append(des_ofb.iv_des[0])
+
+            des_ofb.text.pop(0)
+            des_ofb.iv.pop(0)
 
         des_ofb.text = hex(int(f'0b{"".join(des_ofb.text)}', 2))[2:].upper()
 
