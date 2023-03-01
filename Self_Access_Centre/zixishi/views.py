@@ -38,7 +38,7 @@ class Prepare(View):
 
             txt = {i: j for i, j in zip(["text","key","iv"], data)}     # 读取上传的文件的数据，达到同化文件问题为字符串问题的效果
 # 补充：多轮的实现
-        text = args.get("text")
+        text = args.get("text") or txt['text']
         divided_text = []
         for i in range(0,len(text),16):
             divided_text.append(text[i:i+16])
